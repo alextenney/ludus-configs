@@ -123,10 +123,9 @@ network:
 
     - name: Allow linux and windows to Splunk
       vlan_src: 20
-      ip_last_octet_src: 2:3  # Range of .2 and .3
+      ip_last_octet_src: 2-3  # Range of .2 and .3
       vlan_dst: 20
       ip_last_octet_dst: 1
       protocol: all
       ports: all
       action: ACCEPT
-  
