@@ -63,4 +63,70 @@ ludus:
     roles:
       - 0xRedpoll.ludus_mythic_teamserver
 
+network:
+  external_default: ACCEPT
+  wireguard_vlan_default: ACCEPT
+  rules:
+    - name: Allow kali to mythic
+      vlan_src: 99
+      ip_last_octet_src: 1
+      vlan_dst: 99
+      ip_last_octet_dst: 2
+      protocol: all
+      ports: all
+      action: ACCEPT
+
+    - name: Allow mythic to kali
+      vlan_src: 99
+      ip_last_octet_src: 2
+      vlan_dst: 99
+      ip_last_octet_dst: 1
+      protocol: all
+      ports: all
+      action: ACCEPT
+
+    - name: Allow windows to mythic
+      vlan_src: 20
+      ip_last_octet_src: 3
+      vlan_dst: 99
+      ip_last_octet_dst: 2
+      protocol: all
+      ports: all
+      action: ACCEPT
+
+    - name: Allow mythic to windows
+      vlan_src: 99
+      ip_last_octet_src: 2
+      vlan_dst: 20
+      ip_last_octet_dst: 3
+      protocol: all
+      ports: all
+      action: ACCEPT
+
+    - name: Allow linux to mythic
+      vlan_src: 20
+      ip_last_octet_src: 2
+      vlan_dst: 99
+      ip_last_octet_dst: 2
+      protocol: all
+      ports: all
+      action: ACCEPT
+
+    - name: Allow mythic to linux
+      vlan_src: 99
+      ip_last_octet_src: 2
+      vlan_dst: 20
+      ip_last_octet_dst: 2
+      protocol: all
+      ports: all
+      action: ACCEPT
+
+    - name: Allow linux and windows to Splunk
+      vlan_src: 20
+      ip_last_octet_src: 2:3  # Range of .2 and .3
+      vlan_dst: 20
+      ip_last_octet_dst: 1
+      protocol: all
+      ports: all
+      action: ACCEPT
   
